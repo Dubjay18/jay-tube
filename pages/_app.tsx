@@ -17,7 +17,7 @@ export default function App({
     <QueryClientProvider client={queryClient}>
       <ThemeProvider
         attribute='class'
-        defaultTheme='system'
+        defaultTheme='dark'
         enableSystem>
         <Component {...pageProps} />
       </ThemeProvider>

@@ -24,7 +24,7 @@ import { Label } from "./ui/label";
 function Navbar() {
   return (
     <div className='flex items-center justify-between py-4 px-2 bg-background'>
-      <div>
+      <div className='flex items-center gap-4'>
         <Sheet>
           <SheetTrigger asChild>
             <Button variant={"ghost"}>
@@ -72,6 +72,7 @@ function Navbar() {
             </SheetFooter>
           </SheetContent>
         </Sheet>
+        <h1>Jaytube</h1>
       </div>
       <div className='flex items-center gap-3'>
         <div className='flex w-full max-w-sm items-center space-x-2'>
