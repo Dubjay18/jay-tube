@@ -13,6 +13,7 @@ import Image from "next/image";
 import { getTimeElapsed } from "@/lib/utils";
 import { Dot } from "lucide-react";
 import TruncateText from "./TruncatedText";
+import TimeTag from "./TimeTag";
 
 function Grid() {
   const options = useMemo(
@@ -35,7 +36,7 @@ function Grid() {
       {(data as any)?.map(
         (item: IParsedVideoData, i: number) => (
           <Card className='border-none' key={i}>
-            <CardHeader>
+            <CardHeader className='relative'>
               <Image
                 src={
                   item?.image ||
@@ -46,6 +47,7 @@ function Grid() {
                 height={item?.imageHeight || 400}
                 className='rounded-lg cursor-pointer'
               />
+              <TimeTag text={item?.videoDuration} />
             </CardHeader>
             <CardContent>
               <p className='scroll-m-20 text-xl font-semibold tracking-tight '>
