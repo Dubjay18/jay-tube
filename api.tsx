@@ -4,25 +4,22 @@ import {
   parseVideoDuration,
 } from "./lib/utils";
 
-export const fetchHomPageVideos = () => {
+export const fetchHomPageVideos = async () => {
   console.log(process.env.NEXT_PUBLIC_YOUTUBE_API_URL);
 
-  return axios
-    .get(
+  try {
+    const response = await axios.get(
       `${process.env.NEXT_PUBLIC_YOUTUBE_API_URL}search?part=snippet&chart=mostPopular&maxResults=20&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}&type=video`
-    )
-    .then((response) => {
-      console.log(response.data.items, "data");
-      console.log(
-        parseVideoData(response.data.items),
-        "parseVideoData"
-      );
-
-      return response.data.items;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    );
+    console.log(response.data.items, "data");
+    console.log(
+      parseVideoData(response.data.items),
+      "parseVideoData"
+    );
+    return parseVideoData(response.data.items);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const parseVideoData = async (items: IVideoData[]) => {
@@ -81,6 +78,9 @@ const parseVideoData = async (items: IVideoData[]) => {
           channelImage: channel?.image,
           viewCount: video.statistics?.viewCount,
           publishedAt: video.snippet.publishedAt,
+          imageWidth: video.snippet.thumbnails.high?.width,
+          imageHeight:
+            video.snippet.thumbnails.high?.height,
           image: video.snippet.thumbnails.high?.url,
           videoLink: `https://www.youtube.com/watch?v=${video.id.videoId}`,
           description: video.snippet.description,

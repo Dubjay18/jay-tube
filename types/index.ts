@@ -75,4 +75,6 @@ interface IParsedVideoData {
   viewCount?: string;
   videoViews?: string;
   videoLink?: string;
+  imageWidth?: number;
+  imageHeight?: number;
 }
